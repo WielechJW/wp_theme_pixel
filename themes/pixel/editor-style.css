@@ -1,0 +1,30 @@
+:root {
+	--color-bg: #f7f4ee;
+	--color-text: #1b1b1b;
+	--color-muted: #5a5a5a;
+	--color-accent: #0b5fff;
+}
+
+.editor-styles-wrapper {
+	font-family: "Space Grotesk", "Segoe UI", sans-serif;
+	font-size: 16px;
+	line-height: 1.7;
+	color: var( --color-text );
+	background: var( --color-bg );
+}
+
+.editor-styles-wrapper a {
+	color: var( --color-accent );
+}
+
+.editor-styles-wrapper .wp-block {
+	max-width: 720px;
+}
+
+.editor-styles-wrapper .wp-block[data-align="wide"] {
+	max-width: 960px;
+}
+
+.editor-styles-wrapper .wp-block[data-align="full"] {
+	max-width: none;
+}

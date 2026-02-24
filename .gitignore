@@ -1,0 +1,10 @@
+# Keep this repository focused on custom project code only.
+# Ignore all files by default, then allow selected paths.
+*
+!.gitignore
+
+# Track themes folder structure, but keep only the custom theme.
+!themes/
+themes/*
+!themes/pixel/
+!themes/pixel/**
