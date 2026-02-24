@@ -1,0 +1,44 @@
+.wp-block-button__link,
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+.button {
+	background: var( --color-coral );
+	color: var( --color-white );
+	border: 0;
+	border-radius: 999px;
+	padding: 0.7rem 1.15rem;
+	font-weight: 700;
+	text-decoration: none;
+	cursor: pointer;
+	@include smooth-transition( background-color );
+}
+
+.wp-block-button__link:hover,
+.wp-block-button__link:focus-visible,
+button:hover,
+button:focus-visible,
+input[type="button"]:hover,
+input[type="button"]:focus-visible,
+input[type="reset"]:hover,
+input[type="reset"]:focus-visible,
+input[type="submit"]:hover,
+input[type="submit"]:focus-visible,
+.button:hover,
+.button:focus-visible {
+	background: var( --color-coral-hover );
+	color: var( --color-white );
+}
+
+.button-secondary,
+.wp-block-button.is-style-secondary .wp-block-button__link {
+	background: var( --color-primary );
+}
+
+.button-secondary:hover,
+.button-secondary:focus-visible,
+.wp-block-button.is-style-secondary .wp-block-button__link:hover,
+.wp-block-button.is-style-secondary .wp-block-button__link:focus-visible {
+	background: var( --color-primary-hover );
+}

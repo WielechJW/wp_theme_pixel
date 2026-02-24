@@ -1,0 +1,8 @@
+@mixin smooth-transition($property: color, $duration: 0.2s, $timing: ease) {
+	transition: $property $duration $timing;
+}
+
+@mixin rounded-surface($padding: 1.4rem, $radius: 14px) {
+	padding: $padding;
+	border-radius: $radius;
+}

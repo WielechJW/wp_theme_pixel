@@ -1,0 +1,9 @@
+a {
+	color: var( --color-primary );
+	@include smooth-transition();
+}
+
+a:hover,
+a:focus-visible {
+	color: var( --color-coral );
+}

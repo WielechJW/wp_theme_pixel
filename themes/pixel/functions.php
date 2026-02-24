@@ -43,6 +43,10 @@ function pixel_setup() {
 add_action( 'after_setup_theme', 'pixel_setup' );
 
 function pixel_assets() {
-	wp_enqueue_style( 'pixel-style', get_stylesheet_uri(), array(), PIXEL_VERSION );
+	$main_style_path = get_template_directory() . '/assets/css/main.css';
+	$main_style_uri  = get_template_directory_uri() . '/assets/css/main.css';
+	$main_style_ver  = file_exists( $main_style_path ) ? (string) filemtime( $main_style_path ) : PIXEL_VERSION;
+
+	wp_enqueue_style( 'pixel-style', $main_style_uri, array(), $main_style_ver );
 }
 add_action( 'wp_enqueue_scripts', 'pixel_assets' );

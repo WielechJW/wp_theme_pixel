@@ -8,3 +8,8 @@
 themes/*
 !themes/pixel/
 !themes/pixel/**
+
+# Frontend tooling artifacts for the custom theme.
+themes/pixel/node_modules/
+themes/pixel/.sass-cache/
+themes/pixel/assets/css/*.map

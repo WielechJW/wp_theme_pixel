@@ -13,3 +13,7 @@ License URI: LICENSE
 Text Domain: pixel
 */
 
+/*
+ * Theme metadata lives in this file.
+ * Frontend styles are organized in SCSS and compiled to assets/css/main.css.
+ */

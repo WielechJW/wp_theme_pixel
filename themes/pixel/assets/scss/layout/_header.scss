@@ -1,0 +1,29 @@
+.site-header {
+	background: var( --color-primary );
+	color: var( --color-white );
+	padding: 1.2rem 4vw;
+}
+
+.site-branding {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.custom-logo-link img {
+	max-height: 72px;
+	width: auto;
+}
+
+.site-title {
+	display: inline-block;
+	font-size: 1.4rem;
+	font-weight: 700;
+	color: var( --color-white );
+	text-decoration: none;
+}
+
+.site-tagline {
+	margin: 0.2rem 0 0;
+	color: var( --color-cream );
+}

@@ -1,0 +1,11 @@
+{
+	"name": "pixel-theme",
+	"private": true,
+	"scripts": {
+		"build:css": "sass assets/scss/main.scss assets/css/main.css --style=expanded --no-source-map",
+		"watch:css": "sass --watch assets/scss/main.scss:assets/css/main.css --style=expanded"
+	},
+	"devDependencies": {
+		"sass": "^1.77.8"
+	}
+}

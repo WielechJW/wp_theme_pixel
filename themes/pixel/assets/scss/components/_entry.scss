@@ -1,0 +1,15 @@
+.entry,
+.no-results {
+	background: var( --color-white );
+	box-shadow: 0 10px 24px var( --color-shadow );
+}
+
+.entry-title,
+.page-title {
+	color: var( --color-navy );
+	margin-top: 0;
+}
+
+.entry-meta {
+	color: var( --color-primary-hover );
+}

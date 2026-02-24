@@ -1,0 +1,15 @@
+@media ( max-width: $breakpoint-mobile ) {
+	.site-header {
+		padding: 1rem 5vw;
+	}
+
+	.site-main {
+		width: min( 100%, 94vw );
+		padding-top: 1.4rem;
+	}
+
+	.site-main > section,
+	.site-main > article {
+		padding: 1rem;
+	}
+}

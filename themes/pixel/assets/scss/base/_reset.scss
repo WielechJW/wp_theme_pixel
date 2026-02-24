@@ -1,0 +1,17 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	background: var( --color-cream );
+	color: var( --color-text );
+	font-family: "Space Grotesk", "Avenir Next", "Trebuchet MS", sans-serif;
+	line-height: 1.65;
+}

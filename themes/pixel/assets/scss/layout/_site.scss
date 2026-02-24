@@ -1,0 +1,29 @@
+.site {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.site-main {
+	flex: 1;
+	width: min( 1100px, 92vw );
+	margin: 0 auto;
+	padding: 2rem 0 3rem;
+}
+
+.site-main > * + * {
+	margin-top: 1.4rem;
+}
+
+.site-main > section,
+.site-main > article {
+	@include rounded-surface();
+}
+
+.site-main > section:nth-of-type(odd) {
+	background: var( --color-mint );
+}
+
+.site-main > section:nth-of-type(even) {
+	background: var( --color-white );
+}
