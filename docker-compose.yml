@@ -1,0 +1,47 @@
+version: "3.9"
+
+services:
+  db:
+    image: mariadb:11
+    container_name: wp_theme_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: wp_theme_db
+      MYSQL_USER: wp_user
+      MYSQL_PASSWORD: wp_pass
+    volumes:
+      - db_data:/var/lib/mysql
+
+  wordpress:
+    image: wordpress:6.9-php8.2-apache
+    container_name: wp_theme_wp
+    depends_on:
+      - db
+    restart: unless-stopped
+    ports:
+      - "8050:80"   # WP będzie na http://localhost:8050
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: wp_theme_db
+      WORDPRESS_DB_USER: wp_user
+      WORDPRESS_DB_PASSWORD: wp_pass
+    volumes:
+      - ./wordpress:/var/www/html
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: wp_theme_pma
+    depends_on:
+      - db
+    restart: unless-stopped
+    ports:
+      - "8060:80"   # phpMyAdmin będzie na http://localhost:8060
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: root_password
+
+volumes:
+  db_data:
+
