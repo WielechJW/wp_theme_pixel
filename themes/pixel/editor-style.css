@@ -5,11 +5,14 @@
 	--color-coral: #e76f51;
 	--color-navy: #1f2a44;
 	--color-text: #2b2b2b;
+	--font-heading: "Poppins", "Segoe UI", sans-serif;
+	--font-body: "Inter", "Segoe UI", sans-serif;
 }
 
 .editor-styles-wrapper {
-	font-family: "Space Grotesk", "Segoe UI", sans-serif;
-	font-size: 16px;
+	font-family: var( --font-body );
+	font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+	font-weight: 400;
 	line-height: 1.7;
 	color: var( --color-text );
 	background: var( --color-cream );
@@ -17,6 +20,32 @@
 
 .editor-styles-wrapper a {
 	color: var( --color-primary );
+}
+
+.editor-styles-wrapper h1,
+.editor-styles-wrapper h2,
+.editor-styles-wrapper h3 {
+	font-family: var( --font-heading );
+	color: var( --color-navy );
+	letter-spacing: 0.01em;
+}
+
+.editor-styles-wrapper h1 {
+	font-size: clamp(3rem, 2.6rem + 1.2vw, 3.5rem);
+	font-weight: 700;
+	line-height: 1.1;
+}
+
+.editor-styles-wrapper h2 {
+	font-size: clamp(2rem, 1.8rem + 0.8vw, 2.25rem);
+	font-weight: 600;
+	line-height: 1.2;
+}
+
+.editor-styles-wrapper h3 {
+	font-size: clamp(1.25rem, 1.1rem + 0.7vw, 1.5rem);
+	font-weight: 500;
+	line-height: 1.25;
 }
 
 .editor-styles-wrapper .wp-block {

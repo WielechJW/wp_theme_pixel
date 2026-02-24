@@ -8,8 +8,13 @@
 .page-title {
 	color: var( --color-navy );
 	margin-top: 0;
+	font-family: var( --font-heading );
 }
 
 .entry-meta {
 	color: var( --color-primary-hover );
+	font-family: var( --font-body );
+	font-size: 0.95rem;
+	font-weight: 500;
+	line-height: 1.6;
 }

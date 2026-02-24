@@ -9,8 +9,13 @@ input[type="submit"],
 	border: 0;
 	border-radius: 999px;
 	padding: 0.7rem 1.15rem;
-	font-weight: 700;
+	font-family: var( --font-heading );
+	font-size: var( --font-size-button );
+	font-weight: 600;
+	letter-spacing: 0.5px;
+	line-height: 1.1;
 	text-decoration: none;
+	text-transform: uppercase;
 	cursor: pointer;
 	@include smooth-transition( background-color );
 }
@@ -41,4 +46,12 @@ input[type="submit"]:focus-visible,
 .wp-block-button.is-style-secondary .wp-block-button__link:hover,
 .wp-block-button.is-style-secondary .wp-block-button__link:focus-visible {
 	background: var( --color-primary-hover );
+}
+
+.button-cta,
+.wp-block-button.is-style-cta .wp-block-button__link {
+	font-size: var( --font-size-button-cta );
+	font-weight: 700;
+	letter-spacing: 0.6px;
+	padding: 0.85rem 1.4rem;
 }

@@ -12,6 +12,8 @@ body {
 	margin: 0;
 	background: var( --color-cream );
 	color: var( --color-text );
-	font-family: "Space Grotesk", "Avenir Next", "Trebuchet MS", sans-serif;
-	line-height: 1.65;
+	font-family: var( --font-body );
+	font-size: var( --font-size-body );
+	font-weight: 400;
+	line-height: 1.7;
 }

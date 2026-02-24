@@ -9,6 +9,17 @@
 	--color-text: #2b2b2b;
 	--color-white: #ffffff;
 	--color-shadow: rgba(47, 143, 131, 0.18);
+	--font-heading: "Poppins", "Segoe UI", sans-serif;
+	--font-body: "Inter", "Segoe UI", sans-serif;
+	--font-size-body: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+	--font-size-menu: clamp(0.9375rem, 0.9rem + 0.1vw, 1rem);
+	--font-size-button: clamp(0.9375rem, 0.9rem + 0.1vw, 1rem);
+	--font-size-button-cta: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+	--font-size-h1: clamp(3rem, 2.6rem + 1.2vw, 3.5rem);
+	--font-size-h2: clamp(2rem, 1.8rem + 0.8vw, 2.25rem);
+	--font-size-h3: clamp(1.25rem, 1.1rem + 0.7vw, 1.5rem);
+	--font-size-footer-link: clamp(0.875rem, 0.84rem + 0.1vw, 0.9375rem);
+	--font-size-footer-text: 0.875rem;
 }
 
 *,
@@ -25,8 +36,10 @@ body {
 	margin: 0;
 	background: var( --color-cream );
 	color: var( --color-text );
-	font-family: "Space Grotesk", "Avenir Next", "Trebuchet MS", sans-serif;
-	line-height: 1.65;
+	font-family: var( --font-body );
+	font-size: var( --font-size-body );
+	font-weight: 400;
+	line-height: 1.7;
 }
 
 a {
@@ -37,6 +50,43 @@ a {
 a:hover,
 a:focus-visible {
 	color: var( --color-coral );
+}
+
+h1,
+h2,
+h3 {
+	margin: 0 0 0.55em;
+	font-family: var( --font-heading );
+	color: var( --color-navy );
+	letter-spacing: 0.01em;
+}
+
+h1 {
+	font-size: var( --font-size-h1 );
+	font-weight: 700;
+	line-height: 1.1;
+}
+
+h2 {
+	font-size: var( --font-size-h2 );
+	font-weight: 600;
+	line-height: 1.2;
+}
+
+h3 {
+	font-size: var( --font-size-h3 );
+	font-weight: 500;
+	line-height: 1.25;
+}
+
+p,
+ul,
+ol {
+	margin: 0 0 1em;
+	font-family: var( --font-body );
+	font-size: var( --font-size-body );
+	font-weight: 400;
+	line-height: 1.7;
 }
 
 .site {
@@ -176,6 +226,23 @@ body.menu-open .menu-toggle__icon::after {
 
 .site-footer a {
 	color: var( --color-cream );
+	font-family: var( --font-heading );
+	font-size: var( --font-size-footer-link );
+	font-weight: 500;
+	letter-spacing: 0.02em;
+	text-decoration: none;
+}
+
+.site-footer a:hover,
+.site-footer a:focus-visible {
+	color: var( --color-coral );
+}
+
+.site-footer .site-info {
+	font-family: var( --font-body );
+	font-size: var( --font-size-footer-text );
+	font-weight: 400;
+	line-height: 1.6;
 }
 
 .main-navigation {
@@ -196,13 +263,24 @@ body.menu-open .menu-toggle__icon::after {
 	padding: 0.45rem 0.7rem;
 	border-radius: 999px;
 	color: var( --color-white );
+	font-family: var( --font-heading );
+	font-size: var( --font-size-menu );
+	font-weight: 500;
+	letter-spacing: 0.5px;
 	text-decoration: none;
 }
 
 .main-navigation a:hover,
 .main-navigation a:focus-visible {
-	color: var( --color-navy );
-	background: var( --color-mint );
+	color: var( --color-coral );
+	background: rgba( 255, 255, 255, 0.14 );
+}
+
+.main-navigation .current-menu-item > a,
+.main-navigation .current_page_item > a,
+.main-navigation .current-menu-ancestor > a {
+	font-weight: 600;
+	background: rgba( 31, 42, 68, 0.2 );
 }
 
 .entry,
@@ -215,10 +293,15 @@ body.menu-open .menu-toggle__icon::after {
 .page-title {
 	color: var( --color-navy );
 	margin-top: 0;
+	font-family: var( --font-heading );
 }
 
 .entry-meta {
 	color: var( --color-primary-hover );
+	font-family: var( --font-body );
+	font-size: 0.95rem;
+	font-weight: 500;
+	line-height: 1.6;
 }
 
 .wp-block-button__link,
@@ -232,8 +315,13 @@ input[type="submit"],
 	border: 0;
 	border-radius: 999px;
 	padding: 0.7rem 1.15rem;
-	font-weight: 700;
+	font-family: var( --font-heading );
+	font-size: var( --font-size-button );
+	font-weight: 600;
+	letter-spacing: 0.5px;
+	line-height: 1.1;
 	text-decoration: none;
+	text-transform: uppercase;
 	cursor: pointer;
 	transition: background-color 0.2s ease;
 }
@@ -264,6 +352,14 @@ input[type="submit"]:focus-visible,
 .wp-block-button.is-style-secondary .wp-block-button__link:hover,
 .wp-block-button.is-style-secondary .wp-block-button__link:focus-visible {
 	background: var( --color-primary-hover );
+}
+
+.button-cta,
+.wp-block-button.is-style-cta .wp-block-button__link {
+	font-size: var( --font-size-button-cta );
+	font-weight: 700;
+	letter-spacing: 0.6px;
+	padding: 0.85rem 1.4rem;
 }
 
 input[type="search"],

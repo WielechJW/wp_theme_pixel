@@ -46,8 +46,11 @@ function pixel_assets() {
 	$main_style_path = get_template_directory() . '/assets/css/main.css';
 	$main_style_uri  = get_template_directory_uri() . '/assets/css/main.css';
 	$main_style_ver  = file_exists( $main_style_path ) ? (string) filemtime( $main_style_path ) : PIXEL_VERSION;
+	$font_query      = 'family=Inter:wght@400;500&family=Poppins:wght@500;600;700&display=swap';
+	$font_url        = 'https://fonts.googleapis.com/css2?' . $font_query;
 
-	wp_enqueue_style( 'pixel-style', $main_style_uri, array(), $main_style_ver );
+	wp_enqueue_style( 'pixel-fonts', $font_url, array(), null );
+	wp_enqueue_style( 'pixel-style', $main_style_uri, array( 'pixel-fonts' ), $main_style_ver );
 
 	$navigation_script_path = get_template_directory() . '/assets/js/navigation.js';
 	$navigation_script_uri  = get_template_directory_uri() . '/assets/js/navigation.js';
@@ -63,3 +66,11 @@ function pixel_assets() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'pixel_assets' );
+
+function pixel_editor_assets() {
+	$font_query = 'family=Inter:wght@400;500&family=Poppins:wght@500;600;700&display=swap';
+	$font_url   = 'https://fonts.googleapis.com/css2?' . $font_query;
+
+	wp_enqueue_style( 'pixel-editor-fonts', $font_url, array(), null );
+}
+add_action( 'enqueue_block_editor_assets', 'pixel_editor_assets' );
