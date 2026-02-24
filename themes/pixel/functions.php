@@ -48,5 +48,18 @@ function pixel_assets() {
 	$main_style_ver  = file_exists( $main_style_path ) ? (string) filemtime( $main_style_path ) : PIXEL_VERSION;
 
 	wp_enqueue_style( 'pixel-style', $main_style_uri, array(), $main_style_ver );
+
+	$navigation_script_path = get_template_directory() . '/assets/js/navigation.js';
+	$navigation_script_uri  = get_template_directory_uri() . '/assets/js/navigation.js';
+
+	if ( file_exists( $navigation_script_path ) ) {
+		wp_enqueue_script(
+			'pixel-navigation',
+			$navigation_script_uri,
+			array(),
+			(string) filemtime( $navigation_script_path ),
+			true
+		);
+	}
 }
 add_action( 'wp_enqueue_scripts', 'pixel_assets' );

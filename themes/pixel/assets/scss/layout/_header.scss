@@ -1,13 +1,22 @@
 .site-header {
 	background: var( --color-primary );
 	color: var( --color-white );
-	padding: 1.2rem 4vw;
+	padding: 1.2rem 0;
+}
+
+.site-header__inner {
+	width: min( 1200px, 92vw );
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
 }
 
 .site-branding {
 	display: flex;
 	align-items: center;
 	gap: 1rem;
+	flex-shrink: 0;
 }
 
 .custom-logo-link img {
@@ -26,4 +35,63 @@
 .site-tagline {
 	margin: 0.2rem 0 0;
 	color: var( --color-cream );
+}
+
+.menu-toggle {
+	display: none;
+	background: transparent;
+	border: 0;
+	padding: 0.35rem;
+	margin: 0;
+	color: var( --color-white );
+	border-radius: 8px;
+	cursor: pointer;
+	position: relative;
+	z-index: 1200;
+}
+
+.menu-toggle__icon,
+.menu-toggle__icon::before,
+.menu-toggle__icon::after {
+	display: block;
+	width: 1.3rem;
+	height: 2px;
+	border-radius: 2px;
+	background: currentColor;
+	@include smooth-transition( transform, 0.25s );
+}
+
+.menu-toggle__icon {
+	position: relative;
+}
+
+.menu-toggle__icon::before,
+.menu-toggle__icon::after {
+	content: "";
+	position: absolute;
+	left: 0;
+}
+
+.menu-toggle__icon::before {
+	top: -6px;
+}
+
+.menu-toggle__icon::after {
+	top: 6px;
+}
+
+body.menu-open .menu-toggle__icon {
+	background: transparent;
+}
+
+body.menu-open .menu-toggle__icon::before {
+	transform: translateY( 6px ) rotate( 45deg );
+}
+
+body.menu-open .menu-toggle__icon::after {
+	transform: translateY( -6px ) rotate( -45deg );
+}
+
+.menu-overlay {
+	display: none;
 }

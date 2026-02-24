@@ -73,13 +73,22 @@ a:focus-visible {
 .site-header {
 	background: var( --color-primary );
 	color: var( --color-white );
-	padding: 1.2rem 4vw;
+	padding: 1.2rem 0;
+}
+
+.site-header__inner {
+	width: min( 1200px, 92vw );
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
 }
 
 .site-branding {
 	display: flex;
 	align-items: center;
 	gap: 1rem;
+	flex-shrink: 0;
 }
 
 .custom-logo-link img {
@@ -100,6 +109,65 @@ a:focus-visible {
 	color: var( --color-cream );
 }
 
+.menu-toggle {
+	display: none;
+	background: transparent;
+	border: 0;
+	padding: 0.35rem;
+	margin: 0;
+	color: var( --color-white );
+	border-radius: 8px;
+	cursor: pointer;
+	position: relative;
+	z-index: 1200;
+}
+
+.menu-toggle__icon,
+.menu-toggle__icon::before,
+.menu-toggle__icon::after {
+	display: block;
+	width: 1.3rem;
+	height: 2px;
+	border-radius: 2px;
+	background: currentColor;
+	transition: transform 0.25s ease;
+}
+
+.menu-toggle__icon {
+	position: relative;
+}
+
+.menu-toggle__icon::before,
+.menu-toggle__icon::after {
+	content: "";
+	position: absolute;
+	left: 0;
+}
+
+.menu-toggle__icon::before {
+	top: -6px;
+}
+
+.menu-toggle__icon::after {
+	top: 6px;
+}
+
+body.menu-open .menu-toggle__icon {
+	background: transparent;
+}
+
+body.menu-open .menu-toggle__icon::before {
+	transform: translateY( 6px ) rotate( 45deg );
+}
+
+body.menu-open .menu-toggle__icon::after {
+	transform: translateY( -6px ) rotate( -45deg );
+}
+
+.menu-overlay {
+	display: none;
+}
+
 .site-footer {
 	background: var( --color-navy );
 	color: var( --color-cream );
@@ -111,13 +179,13 @@ a:focus-visible {
 }
 
 .main-navigation {
-	margin-top: 1rem;
+	margin-left: auto;
 }
 
 .main-navigation ul {
 	list-style: none;
 	display: flex;
-	flex-wrap: wrap;
+	align-items: center;
 	gap: 0.9rem;
 	margin: 0;
 	padding: 0;
@@ -154,7 +222,7 @@ a:focus-visible {
 }
 
 .wp-block-button__link,
-button,
+button:not(.menu-toggle):not(.menu-overlay),
 input[type="button"],
 input[type="reset"],
 input[type="submit"],
@@ -172,8 +240,8 @@ input[type="submit"],
 
 .wp-block-button__link:hover,
 .wp-block-button__link:focus-visible,
-button:hover,
-button:focus-visible,
+button:not(.menu-toggle):not(.menu-overlay):hover,
+button:not(.menu-toggle):not(.menu-overlay):focus-visible,
 input[type="button"]:hover,
 input[type="button"]:focus-visible,
 input[type="reset"]:hover,
@@ -231,9 +299,14 @@ select {
 	box-shadow: 0 8px 22px var( --color-shadow );
 }
 
-@media ( max-width: 782px ) {
+@media ( max-width: 1000px ) {
 	.site-header {
-		padding: 1rem 5vw;
+		padding: 1rem 0;
+	}
+
+	.site-header__inner {
+		width: min( 100%, 92vw );
+		gap: 0.75rem;
 	}
 
 	.site-main {
@@ -244,5 +317,100 @@ select {
 	.site-main > section,
 	.site-main > article {
 		padding: 1rem;
+	}
+
+	.site-branding {
+		gap: 0.65rem;
+		min-width: 0;
+		flex: 1;
+		order: 1;
+	}
+
+	.custom-logo-link img {
+		max-height: 64px;
+	}
+
+	.site-title {
+		font-size: 1.15rem;
+	}
+
+	.site-tagline {
+		display: none;
+	}
+
+	.js .menu-toggle {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		right: auto;
+		left: auto;
+		width: 2.7rem;
+		height: 2.7rem;
+		margin-left: auto;
+		order: 2;
+		flex-shrink: 0;
+	}
+
+	.js .menu-toggle__icon,
+	.js .menu-toggle__icon::before,
+	.js .menu-toggle__icon::after {
+		width: 1.55rem;
+	}
+
+	.js .main-navigation {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: min( 75vw, 360px );
+		max-width: 75vw;
+		height: 100dvh;
+		margin: 0;
+		padding: 6.75rem 1rem 1.25rem;
+		background: var( --color-primary );
+		transform: translateX( -100% );
+		transition: transform 0.3s ease;
+		box-shadow: 20px 0 35px rgba(31, 42, 68, 0.35);
+		z-index: 1100;
+	}
+
+	.js .main-navigation ul {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 0.35rem;
+	}
+
+	.js .main-navigation a {
+		display: block;
+		width: 100%;
+		padding: 0.75rem 0.85rem;
+		border-radius: 10px;
+	}
+
+	.js .menu-overlay {
+		position: fixed;
+		inset: 0;
+		display: block;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		background: rgba(31, 42, 68, 0.45);
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 0.3s ease;
+		z-index: 1000;
+	}
+
+	body.menu-open {
+		overflow: hidden;
+	}
+
+	body.menu-open .main-navigation {
+		transform: translateX( 0 );
+	}
+
+	body.menu-open .menu-overlay {
+		opacity: 1;
+		pointer-events: auto;
 	}
 }

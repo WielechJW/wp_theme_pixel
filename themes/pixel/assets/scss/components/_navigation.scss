@@ -1,11 +1,11 @@
 .main-navigation {
-	margin-top: 1rem;
+	margin-left: auto;
 }
 
 .main-navigation ul {
 	list-style: none;
 	display: flex;
-	flex-wrap: wrap;
+	align-items: center;
 	gap: 0.9rem;
 	margin: 0;
 	padding: 0;
