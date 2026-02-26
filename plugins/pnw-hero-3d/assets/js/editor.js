@@ -438,6 +438,22 @@
 										setAttributes( { ctaUrl: value } );
 									},
 								} ),
+								el( TextControl, {
+									key: 'ctaSecondaryText',
+									label: __( 'Second CTA Text', 'pnw-hero-3d' ),
+									value: attributes.ctaSecondaryText || '',
+									onChange: function ( value ) {
+										setAttributes( { ctaSecondaryText: value } );
+									},
+								} ),
+								el( TextControl, {
+									key: 'ctaSecondaryUrl',
+									label: __( 'Second CTA URL', 'pnw-hero-3d' ),
+									value: attributes.ctaSecondaryUrl || '',
+									onChange: function ( value ) {
+										setAttributes( { ctaSecondaryUrl: value } );
+									},
+								} ),
 							]
 						)
 					),
@@ -476,26 +492,56 @@
 										} ),
 										el(
 											'div',
-											{ className: 'pnw-hero-3d__cta-row', key: 'ctaRow' },
+											{ className: 'pnw-hero-3d__cta-controls', key: 'ctaControls' },
 											[
-												el( RichText, {
-													key: 'ctaTextRich',
-													tagName: 'span',
-													className: 'pnw-hero-3d__cta-label',
-													value: attributes.ctaText || '',
-													allowedFormats: [],
-													placeholder: __( 'Tekst CTA', 'pnw-hero-3d' ),
-													onChange: function ( value ) {
-														setAttributes( { ctaText: value } );
-													},
-												} ),
-												el( URLInputButton, {
-													key: 'ctaUrlInput',
-													url: attributes.ctaUrl || '',
-													onChange: function ( url ) {
-														setAttributes( { ctaUrl: url || '' } );
-													},
-												} ),
+												el(
+													'div',
+													{ className: 'pnw-hero-3d__cta-row', key: 'ctaRowPrimary' },
+													[
+														el( RichText, {
+															key: 'ctaTextRich',
+															tagName: 'span',
+															className: 'pnw-hero-3d__cta-label pnw-hero-3d__cta-label--primary',
+															value: attributes.ctaText || '',
+															allowedFormats: [],
+															placeholder: __( 'Tekst CTA', 'pnw-hero-3d' ),
+															onChange: function ( value ) {
+																setAttributes( { ctaText: value } );
+															},
+														} ),
+														el( URLInputButton, {
+															key: 'ctaUrlInput',
+															url: attributes.ctaUrl || '',
+															onChange: function ( url ) {
+																setAttributes( { ctaUrl: url || '' } );
+															},
+														} ),
+													]
+												),
+												el(
+													'div',
+													{ className: 'pnw-hero-3d__cta-row', key: 'ctaRowSecondary' },
+													[
+														el( RichText, {
+															key: 'ctaSecondaryTextRich',
+															tagName: 'span',
+															className: 'pnw-hero-3d__cta-label pnw-hero-3d__cta-label--secondary',
+															value: attributes.ctaSecondaryText || '',
+															allowedFormats: [],
+															placeholder: __( 'Drugi tekst CTA', 'pnw-hero-3d' ),
+															onChange: function ( value ) {
+																setAttributes( { ctaSecondaryText: value } );
+															},
+														} ),
+														el( URLInputButton, {
+															key: 'ctaSecondaryUrlInput',
+															url: attributes.ctaSecondaryUrl || '',
+															onChange: function ( url ) {
+																setAttributes( { ctaSecondaryUrl: url || '' } );
+															},
+														} ),
+													]
+												),
 											]
 										),
 									]

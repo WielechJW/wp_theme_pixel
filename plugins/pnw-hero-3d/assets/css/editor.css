@@ -23,14 +23,27 @@
 	flex-wrap: wrap;
 }
 
+.wp-block-pnw-hero-3d .pnw-hero-3d__cta-controls {
+	display: grid;
+	gap: 0.5rem;
+}
+
 .wp-block-pnw-hero-3d .pnw-hero-3d__cta-label {
 	display: inline-block;
 	min-width: 6ch;
 	padding: 0.65rem 1.15rem;
 	border-radius: 999px;
-	background: #0b5fff;
+	background: var( --color-coral, #e76f51 );
 	color: #ffffff;
 	font-size: 0.95rem;
 	font-weight: 600;
 	line-height: 1;
+}
+
+.wp-block-pnw-hero-3d .pnw-hero-3d__cta-label--primary {
+	background: var( --color-coral, #e76f51 );
+}
+
+.wp-block-pnw-hero-3d .pnw-hero-3d__cta-label--secondary {
+	background: var( --color-primary, #2f8f83 );
 }

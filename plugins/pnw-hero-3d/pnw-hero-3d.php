@@ -110,17 +110,21 @@ add_action( 'init', 'pnw_hero_3d_register_block' );
  */
 function pnw_hero_3d_render_block( $attributes ) {
 	$defaults = array(
-		'headline'    => 'Tworzymy z pasją, warstwa po warstwie.',
-		'description' => 'Projektujemy i drukujemy 3D — prototypy, części i personalizowane produkty.',
-		'ctaText'     => 'Zobacz ofertę',
-		'ctaUrl'      => '/oferta',
+		'headline'         => 'Tworzymy z pasją, warstwa po warstwie.',
+		'description'      => 'Projektujemy i drukujemy 3D — prototypy, części i personalizowane produkty.',
+		'ctaText'          => 'Zobacz ofertę',
+		'ctaUrl'           => '/oferta',
+		'ctaSecondaryText' => 'Skontaktuj się',
+		'ctaSecondaryUrl'  => '/kontakt',
 	);
 
-	$attributes  = wp_parse_args( is_array( $attributes ) ? $attributes : array(), $defaults );
-	$headline    = sanitize_text_field( (string) $attributes['headline'] );
-	$description = sanitize_textarea_field( (string) $attributes['description'] );
-	$cta_text    = sanitize_text_field( (string) $attributes['ctaText'] );
-	$cta_url     = esc_url( (string) $attributes['ctaUrl'] );
+	$attributes         = wp_parse_args( is_array( $attributes ) ? $attributes : array(), $defaults );
+	$headline           = sanitize_text_field( (string) $attributes['headline'] );
+	$description        = sanitize_textarea_field( (string) $attributes['description'] );
+	$cta_text           = sanitize_text_field( (string) $attributes['ctaText'] );
+	$cta_url            = esc_url( (string) $attributes['ctaUrl'] );
+	$cta_secondary_text = sanitize_text_field( (string) $attributes['ctaSecondaryText'] );
+	$cta_secondary_url  = esc_url( (string) $attributes['ctaSecondaryUrl'] );
 
 	$wrapper_attributes = get_block_wrapper_attributes(
 		array(
@@ -135,10 +139,19 @@ function pnw_hero_3d_render_block( $attributes ) {
 			<div class="pnw-hero-3d__content">
 				<h2 class="pnw-hero-3d__headline"><?php echo esc_html( $headline ); ?></h2>
 				<p class="pnw-hero-3d__description"><?php echo esc_html( $description ); ?></p>
-				<?php if ( '' !== $cta_text ) : ?>
-					<a class="pnw-hero-3d__cta-link" href="<?php echo esc_url( '' !== $cta_url ? $cta_url : '#' ); ?>">
-						<?php echo esc_html( $cta_text ); ?>
-					</a>
+				<?php if ( '' !== $cta_text || '' !== $cta_secondary_text ) : ?>
+					<div class="pnw-hero-3d__actions">
+						<?php if ( '' !== $cta_text ) : ?>
+							<a class="pnw-hero-3d__cta-link pnw-hero-3d__cta-link--primary" href="<?php echo esc_url( '' !== $cta_url ? $cta_url : '#' ); ?>">
+								<?php echo esc_html( $cta_text ); ?>
+							</a>
+						<?php endif; ?>
+						<?php if ( '' !== $cta_secondary_text ) : ?>
+							<a class="pnw-hero-3d__cta-link pnw-hero-3d__cta-link--secondary" href="<?php echo esc_url( '' !== $cta_secondary_url ? $cta_secondary_url : '#' ); ?>">
+								<?php echo esc_html( $cta_secondary_text ); ?>
+							</a>
+						<?php endif; ?>
+					</div>
 				<?php endif; ?>
 			</div>
 			<div class="pnw-hero-3d__media" data-pnw-hero-3d-scene>

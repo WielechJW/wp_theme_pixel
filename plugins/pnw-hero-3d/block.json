@@ -24,6 +24,14 @@
 		"ctaUrl": {
 			"type": "string",
 			"default": "/oferta"
+		},
+		"ctaSecondaryText": {
+			"type": "string",
+			"default": "Skontaktuj się"
+		},
+		"ctaSecondaryUrl": {
+			"type": "string",
+			"default": "/kontakt"
 		}
 	},
 	"supports": {
