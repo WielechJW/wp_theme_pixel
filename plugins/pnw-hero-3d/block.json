@@ -1,0 +1,37 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "pnw/hero-3d",
+	"version": "1.0.0",
+	"title": "Hero 3D (Three.js)",
+	"category": "design",
+	"icon": "format-image",
+	"description": "Sekcja HERO z tekstem i podgladem modelu 3D GLB.",
+	"textdomain": "pnw-hero-3d",
+	"attributes": {
+		"headline": {
+			"type": "string",
+			"default": "Tworzymy z pasją, warstwa po warstwie."
+		},
+		"description": {
+			"type": "string",
+			"default": "Projektujemy i drukujemy 3D — prototypy, części i personalizowane produkty."
+		},
+		"ctaText": {
+			"type": "string",
+			"default": "Zobacz ofertę"
+		},
+		"ctaUrl": {
+			"type": "string",
+			"default": "/oferta"
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [ "wide", "full" ]
+	},
+	"editorScript": "pnw-hero-3d-editor",
+	"viewScript": "pnw-hero-3d-view",
+	"style": "pnw-hero-3d-style",
+	"editorStyle": "pnw-hero-3d-editor-style"
+}

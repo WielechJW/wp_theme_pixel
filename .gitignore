@@ -9,6 +9,12 @@ themes/*
 !themes/pixel/
 !themes/pixel/**
 
+# Track plugins folder structure, but keep only the custom plugin.
+!plugins/
+plugins/*
+!plugins/pnw-hero-3d/
+!plugins/pnw-hero-3d/**
+
 # Frontend tooling artifacts for the custom theme.
 themes/pixel/node_modules/
 themes/pixel/.sass-cache/

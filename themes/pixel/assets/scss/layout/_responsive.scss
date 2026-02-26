@@ -13,9 +13,19 @@
 		padding-top: 1.4rem;
 	}
 
+	.site-main--front {
+		width: min( 100%, 94vw );
+		padding-top: 0;
+	}
+
 	.site-main > section,
 	.site-main > article {
 		padding: 1rem;
+	}
+
+	.site-main--front > section,
+	.site-main--front > article {
+		padding: 0;
 	}
 
 	.site-branding {

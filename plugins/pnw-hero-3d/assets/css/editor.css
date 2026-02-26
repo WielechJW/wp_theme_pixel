@@ -1,0 +1,36 @@
+.wp-block-pnw-hero-3d.pnw-hero-3d {
+	border: 1px dashed rgba(11, 95, 255, 0.22);
+}
+
+.wp-block-pnw-hero-3d .pnw-hero-3d__headline[contenteditable="true"],
+.wp-block-pnw-hero-3d .pnw-hero-3d__description[contenteditable="true"],
+.wp-block-pnw-hero-3d .pnw-hero-3d__cta-label[contenteditable="true"] {
+	outline: 1px dashed transparent;
+	outline-offset: 4px;
+	transition: outline-color 0.2s ease;
+}
+
+.wp-block-pnw-hero-3d .pnw-hero-3d__headline[contenteditable="true"]:focus,
+.wp-block-pnw-hero-3d .pnw-hero-3d__description[contenteditable="true"]:focus,
+.wp-block-pnw-hero-3d .pnw-hero-3d__cta-label[contenteditable="true"]:focus {
+	outline-color: rgba(11, 95, 255, 0.45);
+}
+
+.wp-block-pnw-hero-3d .pnw-hero-3d__cta-row {
+	display: flex;
+	align-items: center;
+	gap: 0.65rem;
+	flex-wrap: wrap;
+}
+
+.wp-block-pnw-hero-3d .pnw-hero-3d__cta-label {
+	display: inline-block;
+	min-width: 6ch;
+	padding: 0.65rem 1.15rem;
+	border-radius: 999px;
+	background: #0b5fff;
+	color: #ffffff;
+	font-size: 0.95rem;
+	font-weight: 600;
+	line-height: 1;
+}
