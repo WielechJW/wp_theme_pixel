@@ -18,6 +18,23 @@ $has_primary_menu = has_nav_menu( 'primary' );
 
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
+<div id="pixel-loader" class="pixel-loader" aria-hidden="true">
+	<span class="pixel-loader__word" aria-hidden="true">
+		<span>P</span>
+		<span>I</span>
+		<span>X</span>
+		<span>E</span>
+		<span>L</span>
+	</span>
+	<span class="pixel-loader__line" aria-hidden="true"></span>
+</div>
+<noscript>
+	<style>
+		#pixel-loader {
+			display: none !important;
+		}
+	</style>
+</noscript>
 <div class="site">
 	<header class="site-header">
 		<div class="site-header__inner">

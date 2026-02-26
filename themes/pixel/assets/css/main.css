@@ -283,6 +283,127 @@ body.menu-open .menu-toggle__icon::after {
 	background: rgba( 31, 42, 68, 0.2 );
 }
 
+.pixel-loader {
+	position: fixed;
+	inset: 0;
+	display: grid;
+	place-content: center;
+	gap: 1rem;
+	background: radial-gradient(circle at 50% -20%, rgba(244, 235, 208, 0.75), transparent 58%), linear-gradient(135deg, var( --color-primary ) 0%, var( --color-primary-hover ) 50%, var( --color-navy ) 100%);
+	overflow: hidden;
+	z-index: 2100;
+	opacity: 1;
+	visibility: visible;
+	transition: opacity 0.45s ease, visibility 0.45s ease;
+}
+
+.pixel-loader::before {
+	content: "";
+	position: absolute;
+	width: min( 60vw, 420px );
+	aspect-ratio: 1;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.08);
+	filter: blur( 2px );
+	transform: translateY( 8% );
+}
+
+.pixel-loader__word {
+	position: relative;
+	z-index: 1;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.08em;
+	font-family: var( --font-heading );
+	font-size: clamp(2rem, 1.2rem + 3.2vw, 4rem);
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var( --color-cream );
+	text-shadow: 0 10px 28px rgba(31, 42, 68, 0.35);
+}
+
+.pixel-loader__word span {
+	display: inline-block;
+	animation: pixel-wave 1.05s ease-in-out infinite;
+}
+
+.pixel-loader__word span:nth-child(2) {
+	animation-delay: 0.08s;
+}
+
+.pixel-loader__word span:nth-child(3) {
+	animation-delay: 0.16s;
+}
+
+.pixel-loader__word span:nth-child(4) {
+	animation-delay: 0.24s;
+}
+
+.pixel-loader__word span:nth-child(5) {
+	animation-delay: 0.32s;
+}
+
+.pixel-loader__line {
+	position: relative;
+	z-index: 1;
+	width: clamp(140px, 28vw, 240px);
+	height: 0.24rem;
+	border-radius: 999px;
+	background: rgba(244, 235, 208, 0.35);
+	overflow: hidden;
+}
+
+.pixel-loader__line::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	width: 44%;
+	border-radius: inherit;
+	background: var( --color-coral );
+	transform: translateX( -100% );
+	animation: pixel-line 1.1s ease-in-out infinite;
+}
+
+body.pixel-loading {
+	overflow: hidden;
+}
+
+body.pixel-loaded .pixel-loader {
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+}
+
+@keyframes pixel-wave {
+	0%, 100% {
+		transform: translateY( 0 );
+	}
+	50% {
+		transform: translateY( -0.32em );
+	}
+}
+
+@keyframes pixel-line {
+	0% {
+		transform: translateX( -100% );
+	}
+	50%, 100% {
+		transform: translateX( 230% );
+	}
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+	.pixel-loader {
+		transition: none;
+	}
+
+	.pixel-loader__word span,
+	.pixel-loader__line::after {
+		animation: none;
+	}
+}
+
 .entry,
 .no-results {
 	background: var( --color-white );

@@ -1,4 +1,42 @@
 ( function () {
+	const loader = document.getElementById( 'pixel-loader' );
+	const body = document.body;
+	let isHidden = false;
+
+	if ( ! loader || ! body ) {
+		return;
+	}
+
+	body.classList.add( 'pixel-loading' );
+
+	function hideLoader() {
+		if ( isHidden ) {
+			return;
+		}
+
+		isHidden = true;
+		body.classList.remove( 'pixel-loading' );
+		body.classList.add( 'pixel-loaded' );
+
+		window.setTimeout( function () {
+			if ( loader.parentNode ) {
+				loader.parentNode.removeChild( loader );
+			}
+		}, 520 );
+	}
+
+	window.addEventListener(
+		'load',
+		function () {
+			window.setTimeout( hideLoader, 180 );
+		},
+		{ once: true }
+	);
+
+	window.setTimeout( hideLoader, 3800 );
+}() );
+
+( function () {
 	const header = document.querySelector( '.site-header' );
 
 	if ( ! header ) {
