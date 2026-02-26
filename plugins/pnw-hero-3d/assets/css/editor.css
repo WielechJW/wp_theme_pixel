@@ -47,3 +47,93 @@
 .wp-block-pnw-hero-3d .pnw-hero-3d__cta-label--secondary {
 	background: var( --color-primary, #2f8f83 );
 }
+
+.wp-block-pnw-oferta-grid.pnw-offer-grid {
+	border: 1px dashed rgba(47, 143, 131, 0.25);
+}
+
+.wp-block-pnw-oferta-grid .pnw-offer-grid__title[contenteditable="true"],
+.wp-block-pnw-oferta-grid .pnw-offer-grid__description[contenteditable="true"],
+.wp-block-pnw-oferta-grid .pnw-offer-grid__card-title[contenteditable="true"],
+.wp-block-pnw-oferta-grid .pnw-offer-grid__card-description[contenteditable="true"] {
+	outline: 1px dashed transparent;
+	outline-offset: 4px;
+	transition: outline-color 0.2s ease;
+}
+
+.wp-block-pnw-oferta-grid .pnw-offer-grid__title[contenteditable="true"]:focus,
+.wp-block-pnw-oferta-grid .pnw-offer-grid__description[contenteditable="true"]:focus,
+.wp-block-pnw-oferta-grid .pnw-offer-grid__card-title[contenteditable="true"]:focus,
+.wp-block-pnw-oferta-grid .pnw-offer-grid__card-description[contenteditable="true"]:focus {
+	outline-color: rgba(47, 143, 131, 0.45);
+}
+
+.wp-block-pnw-jak-to-dziala.pnw-process {
+	border: 1px dashed rgba(31, 42, 68, 0.22);
+}
+
+.wp-block-pnw-jak-to-dziala .pnw-process__item {
+	opacity: 1;
+}
+
+.wp-block-pnw-jak-to-dziala .pnw-process__title[contenteditable="true"],
+.wp-block-pnw-jak-to-dziala .pnw-process__description[contenteditable="true"],
+.wp-block-pnw-jak-to-dziala .pnw-process__card-title[contenteditable="true"],
+.wp-block-pnw-jak-to-dziala .pnw-process__card-description[contenteditable="true"] {
+	outline: 1px dashed transparent;
+	outline-offset: 4px;
+	transition: outline-color 0.2s ease;
+}
+
+.wp-block-pnw-jak-to-dziala .pnw-process__title[contenteditable="true"]:focus,
+.wp-block-pnw-jak-to-dziala .pnw-process__description[contenteditable="true"]:focus,
+.wp-block-pnw-jak-to-dziala .pnw-process__card-title[contenteditable="true"]:focus,
+.wp-block-pnw-jak-to-dziala .pnw-process__card-description[contenteditable="true"]:focus {
+	outline-color: rgba(31, 42, 68, 0.45);
+}
+
+.wp-block-pnw-jak-to-dziala .pnw-process__step-actions {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 0.75rem;
+}
+
+.wp-block-pnw-jak-to-dziala .pnw-process__editor-toolbar {
+	display: flex;
+	justify-content: flex-start;
+	margin-top: 0.9rem;
+}
+
+.wp-block-pnw-dlaczego-my.pnw-why-us {
+	border: 1px dashed rgba(231, 111, 81, 0.3);
+}
+
+.wp-block-pnw-dlaczego-my .pnw-why-us__eyebrow[contenteditable="true"],
+.wp-block-pnw-dlaczego-my .pnw-why-us__title[contenteditable="true"],
+.wp-block-pnw-dlaczego-my .pnw-why-us__description[contenteditable="true"],
+.wp-block-pnw-dlaczego-my .pnw-why-us__card-title[contenteditable="true"],
+.wp-block-pnw-dlaczego-my .pnw-why-us__card-description[contenteditable="true"] {
+	outline: 1px dashed transparent;
+	outline-offset: 4px;
+	transition: outline-color 0.2s ease;
+}
+
+.wp-block-pnw-dlaczego-my .pnw-why-us__eyebrow[contenteditable="true"]:focus,
+.wp-block-pnw-dlaczego-my .pnw-why-us__title[contenteditable="true"]:focus,
+.wp-block-pnw-dlaczego-my .pnw-why-us__description[contenteditable="true"]:focus,
+.wp-block-pnw-dlaczego-my .pnw-why-us__card-title[contenteditable="true"]:focus,
+.wp-block-pnw-dlaczego-my .pnw-why-us__card-description[contenteditable="true"]:focus {
+	outline-color: rgba(231, 111, 81, 0.45);
+}
+
+.wp-block-pnw-dlaczego-my .pnw-why-us__step-actions {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 0.75rem;
+}
+
+.wp-block-pnw-dlaczego-my .pnw-why-us__editor-toolbar {
+	display: flex;
+	justify-content: flex-start;
+	margin-top: 0.9rem;
+}

@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "pnw/dlaczego-my",
+	"version": "1.0.0",
+	"title": "Dlaczego my",
+	"category": "design",
+	"icon": "star-filled",
+	"description": "Nowoczesna sekcja przewag firmy z edytowalnymi kartami.",
+	"textdomain": "pnw-hero-3d",
+	"attributes": {
+		"sectionEyebrow": {
+			"type": "string",
+			"default": "Dlaczego my"
+		},
+		"sectionTitle": {
+			"type": "string",
+			"default": "Twój projekt 3D od pomysłu po finalny detal."
+		},
+		"sectionDescription": {
+			"type": "string",
+			"default": "Pracujemy szybko, transparentnie i z naciskiem na jakość, żebyś od początku wiedział czego się spodziewać."
+		},
+		"reasons": {
+			"type": "array",
+			"default": []
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [ "wide", "full" ]
+	},
+	"editorScript": "pnw-dlaczego-my-editor",
+	"style": "pnw-hero-3d-style",
+	"editorStyle": "pnw-hero-3d-editor-style"
+}

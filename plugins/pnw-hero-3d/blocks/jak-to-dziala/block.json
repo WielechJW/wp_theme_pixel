@@ -1,0 +1,69 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "pnw/jak-to-dziala",
+	"version": "1.0.0",
+	"title": "Jak to działa (Timeline)",
+	"category": "design",
+	"icon": "schedule",
+	"description": "Sekcja krok po kroku z osią i animacją podczas scrollowania.",
+	"textdomain": "pnw-hero-3d",
+	"attributes": {
+		"sectionTitle": {
+			"type": "string",
+			"default": "Jak to działa?"
+		},
+		"sectionDescription": {
+			"type": "string",
+			"default": "Od pomysłu do gotowego elementu 3D - krok po kroku."
+		},
+		"steps": {
+			"type": "array",
+			"default": []
+		},
+		"step1Title": {
+			"type": "string"
+		},
+		"step1Description": {
+			"type": "string"
+		},
+		"step2Title": {
+			"type": "string"
+		},
+		"step2Description": {
+			"type": "string"
+		},
+		"step3Title": {
+			"type": "string"
+		},
+		"step3Description": {
+			"type": "string"
+		},
+		"step4Title": {
+			"type": "string"
+		},
+		"step4Description": {
+			"type": "string"
+		},
+		"step5Title": {
+			"type": "string"
+		},
+		"step5Description": {
+			"type": "string"
+		},
+		"step6Title": {
+			"type": "string"
+		},
+		"step6Description": {
+			"type": "string"
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [ "wide", "full" ]
+	},
+	"editorScript": "pnw-jak-to-dziala-editor",
+	"viewScript": "pnw-jak-to-dziala-view",
+	"style": "pnw-hero-3d-style",
+	"editorStyle": "pnw-hero-3d-editor-style"
+}

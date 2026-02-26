@@ -1,0 +1,76 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "pnw/oferta-grid",
+	"version": "1.0.0",
+	"title": "Oferta (4 kafelki)",
+	"category": "design",
+	"icon": "grid-view",
+	"description": "Sekcja oferty z 4 kafelkami i ikonami.",
+	"textdomain": "pnw-hero-3d",
+	"attributes": {
+		"sectionTitle": {
+			"type": "string",
+			"default": "Co robimy?"
+		},
+		"sectionDescription": {
+			"type": "string",
+			"default": "Projektujemy, prototypujemy i produkujemy elementy 3D dopasowane do Twoich potrzeb."
+		},
+		"card1Title": {
+			"type": "string",
+			"default": "Projekt 3D"
+		},
+		"card1Description": {
+			"type": "string",
+			"default": "Tworzymy modele od zera albo dopracowujemy gotowe pliki pod druk."
+		},
+		"card1Icon": {
+			"type": "string",
+			"default": "dashicons-admin-tools"
+		},
+		"card2Title": {
+			"type": "string",
+			"default": "Prototypowanie"
+		},
+		"card2Description": {
+			"type": "string",
+			"default": "Szybkie iteracje i testowe wydruki, zanim przejdziesz do finalnej wersji."
+		},
+		"card2Icon": {
+			"type": "string",
+			"default": "dashicons-hammer"
+		},
+		"card3Title": {
+			"type": "string",
+			"default": "Produkcja seryjna"
+		},
+		"card3Description": {
+			"type": "string",
+			"default": "Powtarzalne serie elementow z kontrola jakosci i terminow."
+		},
+		"card3Icon": {
+			"type": "string",
+			"default": "dashicons-screenoptions"
+		},
+		"card4Title": {
+			"type": "string",
+			"default": "Personalizacja"
+		},
+		"card4Description": {
+			"type": "string",
+			"default": "Unikalne produkty na zamowienie: od gadzetow po elementy uzytkowe."
+		},
+		"card4Icon": {
+			"type": "string",
+			"default": "dashicons-format-image"
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [ "wide", "full" ]
+	},
+	"editorScript": "pnw-oferta-grid-editor",
+	"style": "pnw-hero-3d-style",
+	"editorStyle": "pnw-hero-3d-editor-style"
+}
