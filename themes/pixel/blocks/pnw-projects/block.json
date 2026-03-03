@@ -1,0 +1,42 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "pixel/pnw-projects",
+	"title": "PNW Realizacje",
+	"category": "widgets",
+	"icon": "grid-view",
+	"description": "Sekcja realizacji z filtrami kategorii i modalem.",
+	"textdomain": "pixel",
+	"attributes": {
+		"sectionTitle": {
+			"type": "string",
+			"default": "Nasze realizacje"
+		},
+		"sectionDescription": {
+			"type": "string",
+			"default": "Zobacz wybrane projekty, które wykonaliśmy dla klientów indywidualnych i firm."
+		},
+		"maxItems": {
+			"type": "number",
+			"default": 8
+		},
+		"showFilters": {
+			"type": "boolean",
+			"default": true
+		},
+		"showTags": {
+			"type": "boolean",
+			"default": true
+		},
+		"defaultCategory": {
+			"type": "number",
+			"default": 0
+		}
+	},
+	"supports": {
+		"html": false,
+		"anchor": true
+	},
+	"editorScript": "pixel-pnw-projects-editor",
+	"editorStyle": "pixel-pnw-projects-editor-style"
+}

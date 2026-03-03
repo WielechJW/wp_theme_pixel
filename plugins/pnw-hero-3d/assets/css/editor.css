@@ -137,3 +137,23 @@
 	justify-content: flex-start;
 	margin-top: 0.9rem;
 }
+
+.wp-block-pnw-cta-section.pnw-cta {
+	border: 1px dashed rgba(47, 143, 131, 0.34);
+}
+
+.wp-block-pnw-cta-section .pnw-cta__eyebrow[contenteditable="true"],
+.wp-block-pnw-cta-section .pnw-cta__title[contenteditable="true"],
+.wp-block-pnw-cta-section .pnw-cta__description[contenteditable="true"],
+.wp-block-pnw-cta-section .pnw-cta__button[contenteditable="true"] {
+	outline: 1px dashed transparent;
+	outline-offset: 4px;
+	transition: outline-color 0.2s ease;
+}
+
+.wp-block-pnw-cta-section .pnw-cta__eyebrow[contenteditable="true"]:focus,
+.wp-block-pnw-cta-section .pnw-cta__title[contenteditable="true"]:focus,
+.wp-block-pnw-cta-section .pnw-cta__description[contenteditable="true"]:focus,
+.wp-block-pnw-cta-section .pnw-cta__button[contenteditable="true"]:focus {
+	outline-color: rgba(47, 143, 131, 0.5);
+}

@@ -1,0 +1,46 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "pixel/pnw-testimonials",
+	"title": "PNW Opinie",
+	"category": "widgets",
+	"icon": "format-quote",
+	"description": "Sekcja opinii klientów z układem grid lub slider.",
+	"textdomain": "pixel",
+	"attributes": {
+		"sectionTitle": {
+			"type": "string",
+			"default": "Opinie klientów"
+		},
+		"sectionDescription": {
+			"type": "string",
+			"default": "Kilka słów od osób, które nam zaufały."
+		},
+		"maxItems": {
+			"type": "number",
+			"default": 6
+		},
+		"layout": {
+			"type": "string",
+			"default": "slider"
+		},
+		"showRating": {
+			"type": "boolean",
+			"default": true
+		},
+		"showAvatar": {
+			"type": "boolean",
+			"default": true
+		},
+		"showServiceTag": {
+			"type": "boolean",
+			"default": true
+		}
+	},
+	"supports": {
+		"html": false,
+		"anchor": true
+	},
+	"editorScript": "pixel-pnw-testimonials-editor",
+	"editorStyle": "pixel-pnw-testimonials-editor-style"
+}

@@ -121,6 +121,14 @@ function pnw_hero_3d_register_block() {
 		true
 	);
 
+	wp_register_script(
+		'pnw-cta-section-editor',
+		$base_url . 'assets/js/cta-editor.js',
+		array( 'wp-blocks', 'wp-element', 'wp-i18n', 'wp-components', 'wp-block-editor' ),
+		pnw_hero_3d_asset_version( 'assets/js/cta-editor.js' ),
+		true
+	);
+
 	$block_type = register_block_type(
 		__DIR__,
 		array(
@@ -150,6 +158,13 @@ function pnw_hero_3d_register_block() {
 		__DIR__ . '/blocks/dlaczego-my',
 		array(
 			'render_callback' => 'pnw_dlaczego_my_render_block',
+		)
+	);
+
+	register_block_type(
+		__DIR__ . '/blocks/cta-section',
+		array(
+			'render_callback' => 'pnw_cta_section_render_block',
 		)
 	);
 }
@@ -583,6 +598,90 @@ function pnw_dlaczego_my_render_block( $attributes ) {
 					<p class="pnw-why-us__card-description"><?php echo esc_html( $reason['description'] ); ?></p>
 				</article>
 			<?php endforeach; ?>
+		</div>
+	</section>
+	<?php
+
+	return (string) ob_get_clean();
+}
+
+/**
+ * Dynamic renderer for CTA section block.
+ *
+ * @param array $attributes Block attributes.
+ * @return string
+ */
+function pnw_cta_section_render_block( $attributes ) {
+	$defaults = array(
+		'sectionEyebrow'     => 'Masz gotowy pomysł?',
+		'sectionTitle'       => 'Zamieńmy go w dopracowany wydruk 3D.',
+		'sectionDescription' => 'Napisz do nas, a wrócimy z propozycją wykonania, materiału i terminu realizacji.',
+		'primaryCtaText'     => 'Wyceń projekt',
+		'primaryCtaUrl'      => '/kontakt',
+		'secondaryCtaText'   => 'Zobacz realizacje',
+		'secondaryCtaUrl'    => '/#realizacje',
+		'showSecondaryCta'   => true,
+		'surface'            => 'mint',
+	);
+
+	$attributes          = wp_parse_args( is_array( $attributes ) ? $attributes : array(), $defaults );
+	$section_eyebrow     = sanitize_text_field( (string) $attributes['sectionEyebrow'] );
+	$section_title       = sanitize_text_field( (string) $attributes['sectionTitle'] );
+	$section_description = sanitize_textarea_field( (string) $attributes['sectionDescription'] );
+	$primary_cta_text    = sanitize_text_field( (string) $attributes['primaryCtaText'] );
+	$primary_cta_url     = esc_url( (string) $attributes['primaryCtaUrl'] );
+	$secondary_cta_text  = sanitize_text_field( (string) $attributes['secondaryCtaText'] );
+	$secondary_cta_url   = esc_url( (string) $attributes['secondaryCtaUrl'] );
+	$show_secondary_cta  = ! empty( $attributes['showSecondaryCta'] );
+
+	$surface = sanitize_key( (string) $attributes['surface'] );
+	if ( ! in_array( $surface, array( 'mint', 'cream', 'white' ), true ) ) {
+		$surface = 'mint';
+	}
+
+	if ( '' === $section_eyebrow && '' === $section_title && '' === $section_description && '' === $primary_cta_text && '' === $secondary_cta_text ) {
+		return '';
+	}
+
+	$wrapper_attributes = get_block_wrapper_attributes(
+		array(
+			'class' => 'pnw-cta pnw-cta--' . $surface,
+		)
+	);
+
+	ob_start();
+	?>
+	<section <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+		<div class="pnw-cta__inner">
+			<div class="pnw-cta__content">
+				<?php if ( '' !== $section_eyebrow ) : ?>
+					<p class="pnw-cta__eyebrow"><?php echo esc_html( $section_eyebrow ); ?></p>
+				<?php endif; ?>
+
+				<?php if ( '' !== $section_title ) : ?>
+					<h2 class="pnw-cta__title"><?php echo esc_html( $section_title ); ?></h2>
+				<?php endif; ?>
+
+				<?php if ( '' !== $section_description ) : ?>
+					<p class="pnw-cta__description"><?php echo esc_html( $section_description ); ?></p>
+				<?php endif; ?>
+			</div>
+
+			<?php if ( '' !== $primary_cta_text || ( $show_secondary_cta && '' !== $secondary_cta_text ) ) : ?>
+				<div class="pnw-cta__actions">
+					<?php if ( '' !== $primary_cta_text ) : ?>
+						<a class="pnw-cta__button pnw-cta__button--primary" href="<?php echo esc_url( '' !== $primary_cta_url ? $primary_cta_url : '#' ); ?>">
+							<?php echo esc_html( $primary_cta_text ); ?>
+						</a>
+					<?php endif; ?>
+
+					<?php if ( $show_secondary_cta && '' !== $secondary_cta_text ) : ?>
+						<a class="pnw-cta__button pnw-cta__button--secondary" href="<?php echo esc_url( '' !== $secondary_cta_url ? $secondary_cta_url : '#' ); ?>">
+							<?php echo esc_html( $secondary_cta_text ); ?>
+						</a>
+					<?php endif; ?>
+				</div>
+			<?php endif; ?>
 		</div>
 	</section>
 	<?php
