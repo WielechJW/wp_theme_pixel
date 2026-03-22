@@ -21,6 +21,10 @@ function pixel_setup() {
 	add_theme_support( 'responsive-embeds' );
 	add_theme_support( 'align-wide' );
 	add_theme_support( 'wp-block-styles' );
+	add_theme_support( 'woocommerce' );
+	add_theme_support( 'wc-product-gallery-zoom' );
+	add_theme_support( 'wc-product-gallery-lightbox' );
+	add_theme_support( 'wc-product-gallery-slider' );
 	add_theme_support(
 		'html5',
 		array(
@@ -44,6 +48,18 @@ function pixel_setup() {
 	add_editor_style( 'editor-style.css' );
 }
 add_action( 'after_setup_theme', 'pixel_setup' );
+
+/**
+ * Removes default WooCommerce sidebar output for this theme.
+ *
+ * @return void
+ */
+function pixel_woocommerce_setup() {
+	if ( class_exists( 'WooCommerce' ) ) {
+		remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
+	}
+}
+add_action( 'wp', 'pixel_woocommerce_setup' );
 
 function pixel_assets() {
 	$main_style_path = get_template_directory() . '/assets/css/main.css';
