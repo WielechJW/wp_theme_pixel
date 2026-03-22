@@ -1,0 +1,152 @@
+.site-main--contact {
+	padding-top: 0;
+}
+
+.contact-hero,
+.contact-layout {
+	padding: clamp( 1.4rem, 1rem + 1.2vw, 2.5rem );
+	border-radius: 14px;
+	box-shadow: 0 10px 24px var( --color-shadow );
+}
+
+.contact-hero__inner,
+.contact-layout__inner {
+	width: min( 1200px, 100% );
+	margin: 0 auto;
+}
+
+.contact-hero {
+	text-align: center;
+}
+
+.contact-eyebrow,
+.contact-card__eyebrow {
+	margin-bottom: 0.75rem;
+	font-family: var( --font-heading );
+	font-size: 0.85rem;
+	font-weight: 600;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var( --color-primary-hover );
+}
+
+.contact-hero__title {
+	max-width: 14ch;
+	margin: 0 auto 0.75rem;
+	text-wrap: balance;
+}
+
+.contact-hero__lead {
+	max-width: 62ch;
+	margin: 0 auto;
+}
+
+.contact-grid {
+	display: grid;
+	grid-template-columns: minmax( 0, 0.9fr ) minmax( 0, 1.1fr );
+	gap: 1.25rem;
+	align-items: start;
+}
+
+.contact-details {
+	display: grid;
+	gap: 1rem;
+}
+
+.contact-card,
+.contact-form-wrap {
+	padding: 1.2rem;
+}
+
+.contact-card__title {
+	margin-bottom: 0.55rem;
+}
+
+.contact-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: grid;
+	gap: 0.95rem;
+}
+
+.contact-list li {
+	display: grid;
+	gap: 0.15rem;
+}
+
+.contact-list__label {
+	font-family: var( --font-heading );
+	font-size: 0.85rem;
+	font-weight: 600;
+	color: var( --color-primary-hover );
+}
+
+.contact-form {
+	display: grid;
+	gap: 1rem;
+}
+
+.contact-form__row {
+	margin: 0;
+}
+
+.contact-form__label {
+	display: block;
+	margin-bottom: 0.45rem;
+	font-family: var( --font-heading );
+	font-size: 0.92rem;
+	font-weight: 600;
+	color: var( --color-navy );
+}
+
+.contact-form textarea {
+	resize: vertical;
+	min-height: 12rem;
+}
+
+.contact-form__actions {
+	margin: 0;
+}
+
+.contact-form__trap {
+	position: absolute;
+	left: -9999px;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.contact-notice {
+	margin-bottom: 1rem;
+	padding: 0.85rem 1rem;
+	border-radius: 10px;
+	font-weight: 500;
+}
+
+.contact-notice--success {
+	background: rgba( 167, 215, 201, 0.4 );
+	color: var( --color-primary-hover );
+}
+
+.contact-notice--error {
+	background: rgba( 231, 111, 81, 0.16 );
+	color: var( --color-coral-hover );
+}
+
+@media ( max-width: 900px ) {
+	.contact-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media ( max-width: 781px ) {
+	.contact-hero,
+	.contact-layout {
+		padding: 1rem;
+	}
+
+	.contact-hero__title,
+	.contact-hero__lead {
+		max-width: none;
+	}
+}

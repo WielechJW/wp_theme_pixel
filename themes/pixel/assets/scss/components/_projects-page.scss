@@ -1,0 +1,182 @@
+.site-main--projects {
+	padding-top: 0;
+}
+
+.projects-page-content .entry-content > * + * {
+	margin-top: 1.4rem;
+}
+
+.projects-page-content .entry-content > section {
+	padding: clamp( 1.4rem, 1rem + 1.2vw, 2.5rem );
+	border-radius: 14px;
+	box-shadow: 0 10px 24px var( --color-shadow );
+}
+
+.projects-page-content .entry-content > section > .wp-block-group__inner-container {
+	width: min( 1200px, 100% );
+	margin: 0 auto;
+}
+
+.projects-page-content .wp-block-columns {
+	margin-bottom: 0;
+}
+
+.projects-page-content .wp-block-buttons {
+	margin-bottom: 0;
+}
+
+.projects-eyebrow {
+	margin-bottom: 0.75rem;
+	font-family: var( --font-heading );
+	font-size: 0.85rem;
+	font-weight: 600;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var( --color-primary-hover );
+}
+
+.projects-section-title {
+	text-wrap: balance;
+}
+
+.projects-hero .projects-hero__title {
+	max-width: 16ch;
+	margin-bottom: 0.75rem;
+	text-wrap: balance;
+}
+
+.projects-hero {
+	text-align: center;
+}
+
+.projects-story .projects-section-title,
+.projects-focus .projects-section-title {
+	max-width: 15ch;
+}
+
+.projects-showcase .projects-section-title {
+	max-width: 26ch;
+}
+
+.projects-hero__lead,
+.projects-story p,
+.projects-section-intro,
+.projects-cta__text {
+	max-width: 64ch;
+}
+
+.projects-actions {
+	gap: 0.75rem;
+}
+
+.projects-highlight,
+.projects-metric,
+.projects-focus-card {
+	height: 100%;
+	padding: 1.15rem;
+}
+
+.projects-highlight__label {
+	margin-bottom: 0.75rem;
+	font-family: var( --font-heading );
+	font-size: 0.85rem;
+	font-weight: 600;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var( --color-primary-hover );
+}
+
+.projects-feature-list {
+	margin: 0;
+	padding-left: 1.15rem;
+}
+
+.projects-metrics {
+	gap: 1rem;
+	margin-top: 1rem;
+}
+
+.projects-metric__value {
+	margin-bottom: 0.25rem;
+	font-family: var( --font-heading );
+	font-size: clamp( 1.45rem, 1.2rem + 0.8vw, 2rem );
+	font-weight: 700;
+	line-height: 1.05;
+	color: var( --color-navy );
+}
+
+.projects-metric__label {
+	margin-bottom: 0;
+	color: var( --color-primary-hover );
+	line-height: 1.5;
+}
+
+.projects-focus-grid {
+	gap: 1rem;
+}
+
+.projects-focus-card h3 {
+	margin-bottom: 0.55rem;
+}
+
+.projects-focus-card p {
+	margin-bottom: 0;
+}
+
+.projects-showcase .projects-section-intro {
+	margin-bottom: 0;
+}
+
+.projects-showcase .wp-block-pixel-pnw-projects.pnw-projects {
+	margin-top: 0;
+}
+
+.projects-showcase .pnw-projects__inner {
+	max-width: none;
+}
+
+.projects-showcase .pnw-projects__header {
+	text-align: center;
+	margin-bottom: 2rem;
+}
+
+.projects-showcase .pnw-projects__title {
+	margin-bottom: 0;
+}
+
+.projects-cta {
+	text-align: center;
+}
+
+.projects-cta .projects-section-title,
+.projects-cta__text {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.projects-cta .projects-actions {
+	justify-content: center;
+}
+
+.projects-hero__lead,
+.projects-cta__text {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@media ( max-width: 781px ) {
+	.projects-page-content .entry-content > section {
+		padding: 1rem;
+	}
+
+	.projects-story .projects-section-title,
+	.projects-focus .projects-section-title,
+	.projects-showcase .projects-section-title,
+	.projects-hero .projects-hero__title,
+	.projects-hero__lead,
+	.projects-story p,
+	.projects-section-intro,
+	.projects-cta__text {
+		max-width: none;
+	}
+}

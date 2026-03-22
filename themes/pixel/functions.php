@@ -79,6 +79,71 @@ function pixel_editor_assets() {
 add_action( 'enqueue_block_editor_assets', 'pixel_editor_assets' );
 
 /**
+ * Handles contact form submissions from the contact page template.
+ *
+ * @return void
+ */
+function pixel_handle_contact_form_submission() {
+	$redirect_url = wp_get_referer();
+
+	if ( ! $redirect_url ) {
+		$contact_page = get_page_by_path( 'kontakt' );
+		$redirect_url = $contact_page instanceof WP_Post ? get_permalink( $contact_page ) : home_url( '/kontakt' );
+	}
+
+	if ( ! isset( $_POST['pixel_contact_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['pixel_contact_nonce'] ) ), 'pixel_contact_form_submit' ) ) {
+		wp_safe_redirect( add_query_arg( 'contact_status', 'error', $redirect_url ) );
+		exit;
+	}
+
+	$honeypot = isset( $_POST['contact_company'] ) ? trim( (string) wp_unslash( $_POST['contact_company'] ) ) : '';
+
+	if ( '' !== $honeypot ) {
+		wp_safe_redirect( add_query_arg( 'contact_status', 'success', $redirect_url ) );
+		exit;
+	}
+
+	$name    = isset( $_POST['contact_name'] ) ? sanitize_text_field( wp_unslash( $_POST['contact_name'] ) ) : '';
+	$email   = isset( $_POST['contact_email'] ) ? sanitize_email( wp_unslash( $_POST['contact_email'] ) ) : '';
+	$subject = isset( $_POST['contact_subject'] ) ? sanitize_text_field( wp_unslash( $_POST['contact_subject'] ) ) : '';
+	$message = isset( $_POST['contact_message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['contact_message'] ) ) : '';
+
+	if ( '' === $name || '' === $subject || '' === $message || ! is_email( $email ) ) {
+		wp_safe_redirect( add_query_arg( 'contact_status', 'error', $redirect_url ) );
+		exit;
+	}
+
+	$admin_email = sanitize_email( (string) get_option( 'admin_email' ) );
+
+	if ( '' === $admin_email || ! is_email( $admin_email ) ) {
+		wp_safe_redirect( add_query_arg( 'contact_status', 'error', $redirect_url ) );
+		exit;
+	}
+
+	$mail_subject = sprintf( __( '[%1$s] %2$s', 'pixel' ), wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ), $subject );
+	$mail_message = implode(
+		"\n\n",
+		array(
+			sprintf( __( 'Imię: %s', 'pixel' ), $name ),
+			sprintf( __( 'E-mail: %s', 'pixel' ), $email ),
+			__( 'Wiadomość:', 'pixel' ),
+			$message,
+		)
+	);
+
+	$headers = array(
+		'Reply-To: ' . $name . ' <' . $email . '>',
+	);
+
+	$sent = wp_mail( $admin_email, $mail_subject, $mail_message, $headers );
+
+	wp_safe_redirect( add_query_arg( 'contact_status', $sent ? 'success' : 'error', $redirect_url ) );
+	exit;
+}
+add_action( 'admin_post_nopriv_pixel_contact_form_submit', 'pixel_handle_contact_form_submission' );
+add_action( 'admin_post_pixel_contact_form_submit', 'pixel_handle_contact_form_submission' );
+
+/**
  * Registers block metadata and block assets.
  *
  * @return void
@@ -427,3 +492,338 @@ function pixel_render_pnw_testimonials_block( $attributes, $content = '', $block
 	get_template_part( 'template-parts/blocks/pnw-testimonials', null, $template_args );
 	return (string) ob_get_clean();
 }
+
+/**
+ * Registers custom block patterns used across marketing pages.
+ *
+ * @return void
+ */
+function pixel_register_block_patterns() {
+	if ( ! function_exists( 'register_block_pattern' ) ) {
+		return;
+	}
+
+	if ( function_exists( 'register_block_pattern_category' ) ) {
+		register_block_pattern_category(
+			'pixel-pages',
+			array(
+				'label' => __( 'Pixel Pages', 'pixel' ),
+			)
+		);
+	}
+
+	$contact_page = get_page_by_path( 'kontakt' );
+	$contact_url  = $contact_page instanceof WP_Post ? get_permalink( $contact_page ) : home_url( '/kontakt' );
+	$projects_page = get_page_by_path( 'realizacje' );
+
+	if ( ! $projects_page instanceof WP_Post ) {
+		$projects_page = get_page_by_path( 'projekty' );
+	}
+
+	$projects_url = $projects_page instanceof WP_Post ? get_permalink( $projects_page ) : home_url( '/#realizacje' );
+
+	$about_pattern_content = sprintf(
+		'<!-- wp:group {"tagName":"section","className":"about-hero section-cream","layout":{"type":"constrained"}} -->
+<section class="wp-block-group about-hero section-cream"><div class="wp-block-group__inner-container">
+<!-- wp:columns {"verticalAlignment":"center","className":"about-hero__columns"} -->
+<div class="wp-block-columns are-vertically-aligned-center about-hero__columns"><!-- wp:column {"verticalAlignment":"center","width":"60%%"} -->
+<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:60%%"><!-- wp:paragraph {"className":"about-eyebrow"} -->
+<p class="about-eyebrow">O nas</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":1,"className":"about-hero__title"} -->
+<h1 class="wp-block-heading about-hero__title">Projektujemy i realizujemy wydruki 3D, które mają działać, wyglądać i ułatwiać pracę.</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"className":"about-hero__lead"} -->
+<p class="about-hero__lead">Łączymy precyzję wykonania z praktycznym podejściem do projektu. Od pierwszej rozmowy skupiamy się na tym, jak element będzie używany, jakie ma ograniczenia i co musi wytrzymać.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons {"className":"about-actions"} -->
+<div class="wp-block-buttons about-actions"><!-- wp:button {"className":"is-style-cta"} -->
+<div class="wp-block-button is-style-cta"><a class="wp-block-button__link wp-element-button" href="%1$s">Porozmawiajmy o projekcie</a></div>
+<!-- /wp:button -->
+
+<!-- wp:button {"className":"is-style-secondary"} -->
+<div class="wp-block-button is-style-secondary"><a class="wp-block-button__link wp-element-button" href="%2$s">Zobacz realizacje</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"verticalAlignment":"center","width":"40%%"} -->
+<div class="wp-block-column is-vertically-aligned-center" style="flex-basis:40%%"><!-- wp:group {"className":"about-highlight-card card","layout":{"type":"constrained"}} -->
+<div class="wp-block-group about-highlight-card card"><div class="wp-block-group__inner-container"><!-- wp:paragraph {"className":"about-highlight-card__label"} -->
+<p class="about-highlight-card__label">Jak pracujemy</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"className":"about-feature-list"} -->
+<ul class="about-feature-list"><li>dobieramy technologię do zastosowania, nie odwrotnie</li><li>upraszczamy proces od pomysłu do gotowego modelu</li><li>dbamy o estetykę, trwałość i powtarzalność wykonania</li></ul>
+<!-- /wp:list --></div></div>
+<!-- /wp:group -->
+
+<!-- wp:columns {"className":"about-metrics"} -->
+<div class="wp-block-columns about-metrics"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:group {"className":"about-metric card","layout":{"type":"constrained"}} -->
+<div class="wp-block-group about-metric card"><div class="wp-block-group__inner-container"><!-- wp:paragraph {"className":"about-metric__value"} -->
+<p class="about-metric__value">100%%</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"about-metric__label"} -->
+<p class="about-metric__label">skupienia na funkcji projektu</p>
+<!-- /wp:paragraph --></div></div>
+<!-- /wp:group --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:group {"className":"about-metric card","layout":{"type":"constrained"}} -->
+<div class="wp-block-group about-metric card"><div class="wp-block-group__inner-container"><!-- wp:paragraph {"className":"about-metric__value"} -->
+<p class="about-metric__value">3D</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"about-metric__label"} -->
+<p class="about-metric__label">druk, prototypy i personalizacja</p>
+<!-- /wp:paragraph --></div></div>
+<!-- /wp:group --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns --></div></section>
+<!-- /wp:group -->
+
+<!-- wp:group {"tagName":"section","className":"about-story section-white","layout":{"type":"constrained"}} -->
+<section class="wp-block-group about-story section-white"><div class="wp-block-group__inner-container">
+<!-- wp:columns {"className":"about-story__columns"} -->
+<div class="wp-block-columns about-story__columns"><!-- wp:column {"width":"38%%"} -->
+<div class="wp-block-column" style="flex-basis:38%%"><!-- wp:paragraph {"className":"about-eyebrow"} -->
+<p class="about-eyebrow">Kim jesteśmy</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"className":"about-section-title"} -->
+<h2 class="wp-block-heading about-section-title">Budujemy współpracę wokół dobrego procesu i czytelnej komunikacji.</h2>
+<!-- /wp:heading --></div>
+<!-- /wp:column -->
+
+<!-- wp:column {"width":"62%%"} -->
+<div class="wp-block-column" style="flex-basis:62%%"><!-- wp:paragraph -->
+<p>Pracujemy zarówno z klientami, którzy mają gotowy model i wiedzą dokładnie, czego potrzebują, jak i z osobami, które dopiero szukają najlepszego rozwiązania. W obu przypadkach naszym zadaniem jest przełożyć pomysł na realny, dobrze wykonany element.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Nie traktujemy projektu jak samego wydruku. Zaczynamy od zrozumienia potrzeb, dobieramy parametry wykonania, a potem pilnujemy jakości na etapie przygotowania, produkcji i wykończenia. Dzięki temu finalny efekt ma sens nie tylko na ekranie, ale też w codziennym użyciu.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns --></div></section>
+<!-- /wp:group -->
+
+<!-- wp:group {"tagName":"section","className":"about-values section-mint","layout":{"type":"constrained"}} -->
+<section class="wp-block-group about-values section-mint"><div class="wp-block-group__inner-container">
+<!-- wp:paragraph {"className":"about-eyebrow"} -->
+<p class="about-eyebrow">Co jest dla nas ważne</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"className":"about-section-title"} -->
+<h2 class="wp-block-heading about-section-title">Kilka zasad, które prowadzą każdy projekt.</h2>
+<!-- /wp:heading -->
+
+<!-- wp:columns {"className":"about-cards"} -->
+<div class="wp-block-columns about-cards"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:group {"className":"about-card card","layout":{"type":"constrained"}} -->
+<div class="wp-block-group about-card card"><div class="wp-block-group__inner-container"><!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Precyzja</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Każdy detal ma znaczenie, dlatego pilnujemy ustawień, materiału i jakości wykończenia.</p>
+<!-- /wp:paragraph --></div></div>
+<!-- /wp:group --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:group {"className":"about-card card","layout":{"type":"constrained"}} -->
+<div class="wp-block-group about-card card"><div class="wp-block-group__inner-container"><!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Praktyczność</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Projekt ma działać w konkretnych warunkach, więc myślimy o użyciu, obciążeniu i montażu.</p>
+<!-- /wp:paragraph --></div></div>
+<!-- /wp:group --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:group {"className":"about-card card","layout":{"type":"constrained"}} -->
+<div class="wp-block-group about-card card"><div class="wp-block-group__inner-container"><!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Partnerstwo</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Mówimy jasno, co warto zrobić, co można uprościć i jak dojść do najlepszego efektu.</p>
+<!-- /wp:paragraph --></div></div>
+<!-- /wp:group --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns --></div></section>
+<!-- /wp:group -->
+
+<!-- wp:group {"tagName":"section","className":"about-process section-white","layout":{"type":"constrained"}} -->
+<section class="wp-block-group about-process section-white"><div class="wp-block-group__inner-container">
+<!-- wp:paragraph {"className":"about-eyebrow"} -->
+<p class="about-eyebrow">Jak wygląda współpraca</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"className":"about-section-title"} -->
+<h2 class="wp-block-heading about-section-title">Prosty proces, który pozwala szybciej dojść do dobrego efektu.</h2>
+<!-- /wp:heading -->
+
+<!-- wp:columns {"className":"about-steps"} -->
+<div class="wp-block-columns about-steps"><!-- wp:column -->
+<div class="wp-block-column"><!-- wp:group {"className":"about-step card","layout":{"type":"constrained"}} -->
+<div class="wp-block-group about-step card"><div class="wp-block-group__inner-container"><!-- wp:paragraph {"className":"about-step__index"} -->
+<p class="about-step__index">01</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Rozpoznanie potrzeb</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Ustalamy zastosowanie, oczekiwania i ograniczenia projektu.</p>
+<!-- /wp:paragraph --></div></div>
+<!-- /wp:group --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:group {"className":"about-step card","layout":{"type":"constrained"}} -->
+<div class="wp-block-group about-step card"><div class="wp-block-group__inner-container"><!-- wp:paragraph {"className":"about-step__index"} -->
+<p class="about-step__index">02</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Dobór rozwiązania</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Wybieramy materiał, technologię i sposób przygotowania modelu.</p>
+<!-- /wp:paragraph --></div></div>
+<!-- /wp:group --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:group {"className":"about-step card","layout":{"type":"constrained"}} -->
+<div class="wp-block-group about-step card"><div class="wp-block-group__inner-container"><!-- wp:paragraph {"className":"about-step__index"} -->
+<p class="about-step__index">03</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Produkcja i kontrola</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Realizujemy wydruk i sprawdzamy, czy końcowy element spełnia założenia.</p>
+<!-- /wp:paragraph --></div></div>
+<!-- /wp:group --></div>
+<!-- /wp:column -->
+
+<!-- wp:column -->
+<div class="wp-block-column"><!-- wp:group {"className":"about-step card","layout":{"type":"constrained"}} -->
+<div class="wp-block-group about-step card"><div class="wp-block-group__inner-container"><!-- wp:paragraph {"className":"about-step__index"} -->
+<p class="about-step__index">04</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Oddanie gotowego projektu</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Dostarczamy dopracowany element lub serię części gotowych do użycia.</p>
+<!-- /wp:paragraph --></div></div>
+<!-- /wp:group --></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns --></div></section>
+<!-- /wp:group -->
+
+<!-- wp:pixel/pnw-testimonials {"sectionTitle":"Co mówią o współpracy","sectionDescription":"Kilka opinii od klientów, którzy przeszli z nami cały proces od pomysłu do realizacji.","layout":"grid","maxItems":3} /-->
+
+<!-- wp:group {"tagName":"section","className":"about-cta section-cream","layout":{"type":"constrained"}} -->
+<section class="wp-block-group about-cta section-cream"><div class="wp-block-group__inner-container">
+<!-- wp:paragraph {"className":"about-eyebrow"} -->
+<p class="about-eyebrow">Porozmawiajmy</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"className":"about-section-title"} -->
+<h2 class="wp-block-heading about-section-title">Masz pomysł, model albo tylko punkt wyjścia? Zobaczymy, jak przełożyć go na gotowy projekt.</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"className":"about-cta__text"} -->
+<p class="about-cta__text">Napisz, czego potrzebujesz. Ustalimy zakres, podpowiemy najlepsze rozwiązanie i wrócimy z konkretną propozycją działania.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons {"className":"about-actions"} -->
+<div class="wp-block-buttons about-actions"><!-- wp:button {"className":"is-style-cta"} -->
+<div class="wp-block-button is-style-cta"><a class="wp-block-button__link wp-element-button" href="%1$s">Przejdź do kontaktu</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div></section>
+<!-- /wp:group -->',
+		esc_url( $contact_url ),
+		esc_url( $projects_url )
+	);
+
+	register_block_pattern(
+		'pixel/about-page',
+		array(
+			'title'         => __( 'O nas', 'pixel' ),
+			'description'   => __( 'Gotowy układ strony O nas spójny z estetyką motywu Pixel.', 'pixel' ),
+			'categories'    => array( 'pixel-pages' ),
+			'viewportWidth' => 1440,
+			'content'       => $about_pattern_content,
+		)
+	);
+
+	$projects_pattern_content = '<!-- wp:group {"tagName":"section","className":"projects-hero section-cream","layout":{"type":"constrained"}} -->
+<section class="wp-block-group projects-hero section-cream"><div class="wp-block-group__inner-container">
+<!-- wp:paragraph {"className":"projects-eyebrow"} -->
+<p class="projects-eyebrow">Realizacje</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":1,"className":"projects-hero__title"} -->
+<h1 class="wp-block-heading projects-hero__title">Zobacz nasze realizacje.</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"className":"projects-hero__lead"} -->
+<p class="projects-hero__lead">Wybrane projekty, które pokazują, jak pracujemy od pomysłu do gotowego efektu.</p>
+<!-- /wp:paragraph --></div></section>
+<!-- /wp:group -->
+
+<!-- wp:group {"tagName":"section","className":"projects-showcase section-white","layout":{"type":"constrained"}} -->
+<section class="wp-block-group projects-showcase section-white"><div class="wp-block-group__inner-container">
+<!-- wp:pixel/pnw-projects {"sectionTitle":"","sectionDescription":"","maxItems":16,"showFilters":false,"showTags":false} /--></div></section>
+<!-- /wp:group -->
+
+<!-- wp:group {"tagName":"section","className":"projects-cta section-cream","layout":{"type":"constrained"}} -->
+<section class="wp-block-group projects-cta section-cream"><div class="wp-block-group__inner-container">
+<!-- wp:heading {"className":"projects-section-title"} -->
+<h2 class="wp-block-heading projects-section-title">Masz podobny projekt?</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"className":"projects-cta__text"} -->
+<p class="projects-cta__text">Napisz do nas i zobaczmy, jak możemy przełożyć go na gotową realizację.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons {"className":"projects-actions"} -->
+<div class="wp-block-buttons projects-actions"><!-- wp:button {"className":"is-style-cta"} -->
+<div class="wp-block-button is-style-cta"><a class="wp-block-button__link wp-element-button" href="%1$s">Przejdź do kontaktu</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div></section>
+<!-- /wp:group -->';
+
+	register_block_pattern(
+		'pixel/projects-page',
+		array(
+			'title'         => __( 'Realizacje', 'pixel' ),
+			'description'   => __( 'Gotowy układ strony realizacji oparty o projekty i filtry z motywu Pixel.', 'pixel' ),
+			'categories'    => array( 'pixel-pages' ),
+			'viewportWidth' => 1440,
+			'content'       => $projects_pattern_content,
+		)
+	);
+}
+add_action( 'init', 'pixel_register_block_patterns' );
